@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>АстроБот - Ваш персональный гороскоп в Telegram</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
@@ -45,7 +48,6 @@
             position: relative;
         }
         
-        /* === УЛУЧШЕНИЕ: Анимация появления секций === */
         section .container {
             opacity: 0;
             transform: translateY(30px);
@@ -111,7 +113,6 @@
             box-shadow: 0 8px 25px rgba(108, 99, 255, 0.6);
         }
 
-        /* === УЛУЧШЕНИЕ: Навигационное меню === */
         nav {
             position: fixed;
             top: 0;
@@ -136,7 +137,6 @@
             text-decoration: none;
         }
 
-        /* Hero Section */
         #hero {
             display: flex;
             flex-direction: column;
@@ -152,7 +152,6 @@
             margin-bottom: 40px;
         }
         
-        /* === УЛУЧШЕНИЕ: Эффект печатающегося текста === */
         .typing-effect::after {
             content: '|';
             animation: blink 0.7s infinite;
@@ -161,7 +160,6 @@
             50% { opacity: 0; }
         }
 
-        /* Features Section */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -200,7 +198,6 @@
             margin-bottom: 0;
         }
         
-        /* Zodiac Section */
         .zodiac-grid {
             display: flex;
             flex-wrap: wrap;
@@ -224,7 +221,6 @@
              box-shadow: 0 0 15px var(--button-bg);
         }
 
-        /* Footer */
         footer {
             padding: 40px 20px;
             text-align: center;
@@ -266,7 +262,7 @@
         <div class="container">
             <h2>Всё, что нужно, в одном месте</h2>
             <div class="features-grid">
-                <div class="feature-card">
+                 <div class="feature-card">
                     <div class="icon">🔮</div>
                     <h3>Все виды гороскопов</h3>
                     <p>Получайте ежедневные, еженедельные, ежемесячные и даже годовые прогнозы, чтобы всегда быть на шаг впереди.</p>
@@ -290,11 +286,11 @@
         </div>
     </section>
 
-    <section id="zodiac">
+     <section id="zodiac">
         <div class="container">
             <h2>12 знаков — 12 уникальных путей</h2>
             <div class="zodiac-grid">
-                <div class="zodiac-sign">♈ Овен</div>
+                 <div class="zodiac-sign">♈ Овен</div>
                 <div class="zodiac-sign">♉ Телец</div>
                 <div class="zodiac-sign">♊ Близнецы</div>
                 <div class="zodiac-sign">♋ Рак</div>
@@ -327,7 +323,6 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
 
-        // 1. Эффект печатающегося текста
         const typingElement = document.querySelector('.typing-effect');
         const textToType = "Ваш персональный астролог";
         let index = 0;
@@ -340,7 +335,6 @@
         }
         type();
         
-        // 2. Анимация появления секций при прокрутке
         const sections = document.querySelectorAll('section');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -354,16 +348,13 @@
             observer.observe(section);
         });
 
-        // 3. Скрывающееся меню при прокрутке вниз
         let lastScrollTop = 0;
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             if (scrollTop > lastScrollTop && scrollTop > navbar.offsetHeight) {
-                // Scroll Down
                 navbar.style.top = '-80px';
             } else {
-                // Scroll Up
                 navbar.style.top = '0';
             }
             lastScrollTop = scrollTop;
