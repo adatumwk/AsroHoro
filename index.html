@@ -245,17 +245,25 @@
              box-shadow: 0 0 15px var(--button-bg);
         }
 
+        /* === ИЗМЕНЕНИЕ ЗДЕСЬ === */
         footer {
             padding: 40px 20px;
-            text-align: center;
             background-color: #080714;
+            /* text-align: center; убран отсюда */
+        }
+        
+        /* Новый, более надежный способ центрирования */
+        footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         footer p {
             margin: 0;
             font-size: 0.9em;
             color: var(--secondary-color);
-            text-align: center; /* <-- ВОТ ИСПРАВЛЕНИЕ */
+            /* text-align: center; убран и отсюда */
         }
         
         @media (max-width: 768px) {
