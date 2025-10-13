@@ -3,312 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>AstrologyScienceBot — Ежедневный гороскоп в вашем Telegram</title>
     <meta name="description" content="Получайте точный ежедневный, еженедельный и годовой гороскоп для всех знаков зодиака прямо в Telegram. Персональные настройки времени и уведомлений. Запустите AstrologyScienceBot бесплатно!">
     <meta name="keywords" content="гороскоп, телеграм бот, ежедневный гороскоп, астрология, знак зодиака, гороскоп на сегодня, AstrologyScienceBot, точный гороскоп, астрологический прогноз">
     <meta name="author" content="Adson">
     <meta name="robots" content="index, follow">
-
     <meta property="og:title" content="AstrologyScienceBot — Ваш персональный астролог в Telegram">
     <meta property="og:description" content="Точные гороскопы на каждый день с персональной настройкой. Узнайте, что говорят звезды, прямо в вашем мессенджере!">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://astrologyscience.ru/">
-    <meta property="og:image" content="https://astrologyscience.ru/preview.jpg"> 
-    
+    <meta property="og:image" content="https://astrologyscience.ru/preview.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AstrologyScienceBot">
+    <meta name="twitter:description" content="Ваш ежедневный гороскоп в Telegram">
+    <meta name="twitter:image" content="https://astrologyscience.ru/preview.jpg">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #f0f0f8;
-            --secondary-color: #a9a9d4;
-            --background-color: #0d0c1d;
-            --button-bg: #6c63ff;
-            --button-hover-bg: #574fde;
-            --card-bg: rgba(26, 26, 58, 0.7);
-            --card-border: rgba(108, 99, 255, 0.3);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
-            color: var(--primary-color);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        section {
-            padding: 80px 20px;
-            text-align: center;
-            position: relative;
-        }
-        
-        section .container {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        section.visible .container {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        
-        h1 {
-            font-size: 3.8em;
-            font-weight: 900;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 2.8em;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        
-        h2::after {
-            content: '';
-            display: block;
-            width: 70px;
-            height: 4px;
-            background: var(--button-bg);
-            margin: 20px auto 0;
-            border-radius: 2px;
-        }
-
-        p {
-            font-size: 1.1em;
-            color: var(--secondary-color);
-            max-width: 700px;
-            margin: 0 auto 30px auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--button-bg), #8e44ad);
-            color: #fff;
-            padding: 16px 40px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(108, 99, 255, 0.4);
-            border: none;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(108, 99, 255, 0.6);
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 15px 0;
-            z-index: 1000;
-            background: rgba(13, 12, 29, 0.8);
-            backdrop-filter: blur(10px);
-            transition: top 0.3s;
-        }
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 1.8em;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-        
-        nav .cta-button {
-            padding: 10px 25px;
-            font-size: 1em;
-        }
-
-        #hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(135deg, #1a1a3a, #0d0c1d 70%);
-            padding-top: 80px;
-        }
-        
-        #hero .subtitle {
-            font-size: 1.4em;
-            margin-bottom: 40px;
-        }
-        
-        .typing-effect::after {
-            content: '|';
-            animation: blink 0.7s infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(5px);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-color: var(--button-bg);
-        }
-
-        .feature-card .icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-            color: var(--button-bg);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-        
-        .feature-card p {
-            font-size: 1em;
-            margin-bottom: 0;
-        }
-        
-        .zodiac-grid {
-            display: grid;
-            justify-content: center;
-            grid-template-columns: repeat(auto-fit, 140px);
-            gap: 15px;
-            margin-top: 40px;
-        }
-
-        .zodiac-link {
-            text-decoration: none;
-        }
-
-        .zodiac-sign {
-            font-size: 1.1em;
-            background-color: var(--card-bg);
-            padding: 15px 10px;
-            border-radius: 50px;
-            border: 1px solid var(--card-border);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .zodiac-sign:hover {
-             background-color: var(--button-bg);
-             transform: scale(1.1);
-             box-shadow: 0 0 15px var(--button-bg);
-        }
-
-        /* === ИЗМЕНЕНИЕ ЗДЕСЬ === */
-        footer {
-            padding: 40px 20px;
-            background-color: #080714;
-            /* text-align: center; убран отсюда */
-        }
-        
-        /* Новый, более надежный способ центрирования */
-        footer .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9em;
-            color: var(--secondary-color);
-            /* text-align: center; убран и отсюда */
-        }
-        
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8em; }
-            h2 { font-size: 2.2em; }
-            
-            .logo { 
-                font-size: 1.2em;
-                font-weight: 700;
-            }
-            nav .cta-button {
-                padding: 8px 18px;
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 340px) {
-            .zodiac-grid {
-                 grid-template-columns: repeat(auto-fit, 120px);
-            }
-        }
+        :root{--primary-color:#f0f0f8;--secondary-color:#a9a9d4;--background-color:#0d0c1d;--button-bg:#6c63ff;--button-hover-bg:#574fde;--card-bg:rgba(26,26,58,0.7);--card-border:rgba(108,99,255,0.3);--gradient-bg:linear-gradient(135deg,#1a1a3a,#0d0c1d 70%);}
+        html{scroll-behavior:smooth;}
+        body{margin:0;font-family:'Roboto',sans-serif;background-color:var(--background-color);color:var(--primary-color);line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;}
+        .container{max-width:1200px;margin:0 auto;padding:0 20px;}
+        section{padding:80px 20px;text-align:center;position:relative;}
+        section .container{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease-out,transform 0.6s ease-out;}
+        section.visible .container{opacity:1;transform:translateY(0);}
+        h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:700;color:var(--primary-color);}
+        h1{font-size:4em;font-weight:900;margin-bottom:20px;}
+        h2{font-size:3em;margin-bottom:40px;position:relative;}
+        h2::after{content:'';display:block;width:80px;height:4px;background:var(--button-bg);margin:20px auto 0;border-radius:2px;}
+        p{font-size:1.1em;color:var(--secondary-color);max-width:800px;margin:0 auto 30px;}
+        .cta-button{display:inline-block;background:linear-gradient(45deg,var(--button-bg),#8e44ad);color:#fff;padding:16px 40px;text-decoration:none;border-radius:50px;font-size:1.2em;font-weight:700;font-family:'Montserrat',sans-serif;transition:all 0.3s ease;box-shadow:0 5px 20px rgba(108,99,255,0.4);border:none;}
+        .cta-button:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 8px 25px rgba(108,99,255,0.6);}
+        nav{position:fixed;top:0;left:0;width:100%;padding:15px 0;z-index:1000;background:rgba(13,12,29,0.8);backdrop-filter:blur(10px);transition:top 0.3s;}
+        nav .container{display:flex;justify-content:space-between;align-items:center;}
+        .logo{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.8em;color:var(--primary-color);text-decoration:none;}
+        nav .cta-button{padding:10px 25px;font-size:1em;}
+        #hero{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;background:url('https://source.unsplash.com/random/1920x1080/?stars,galaxy') no-repeat center/cover,var(--gradient-bg);padding-top:80px;position:relative;}
+        #hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--gradient-bg);opacity:0.5;}
+        #hero .subtitle{font-size:1.5em;margin-bottom:40px;}
+        .typing-effect::after{content:'|';animation:blink 0.7s infinite;}
+        @keyframes blink{50%{opacity:0;}}
+        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:50px;}
+        .feature-card{background:var(--card-bg);padding:40px 30px;border-radius:20px;transition:all 0.3s ease;border:1px solid var(--card-border);backdrop-filter:blur(5px);}
+        .feature-card:hover{transform:translateY(-10px) scale(1.05);box-shadow:0 15px 40px rgba(0,0,0,0.4);border-color:var(--button-bg);}
+        .feature-card .icon{font-size:3.5em;margin-bottom:20px;color:var(--button-bg);transition:transform 0.3s;}
+        .feature-card:hover .icon{transform:rotate(10deg) scale(1.1);}
+        .feature-card h3{font-size:1.6em;margin-bottom:15px;}
+        .feature-card p{font-size:1em;margin-bottom:0;}
+        .zodiac-grid{display:grid;justify-content:center;grid-template-columns:repeat(auto-fit,150px);gap:20px;margin-top:40px;}
+        .zodiac-link{text-decoration:none;}
+        .zodiac-sign{font-size:1.2em;background:var(--card-bg);padding:15px;border-radius:50px;border:1px solid var(--card-border);transition:all 0.3s;cursor:pointer;color:var(--primary-color);display:flex;align-items:center;justify-content:center;}
+        .zodiac-sign:hover{background:linear-gradient(45deg,var(--button-bg),#8e44ad);transform:scale(1.15) rotate(5deg);box-shadow:0 0 20px var(--button-bg);}
+        .example-horoscope{max-width:800px;margin:40px auto;padding:20px;background:var(--card-bg);border-radius:15px;border:1px solid var(--card-border);}
+        .example-horoscope h3{font-size:1.4em;margin-bottom:10px;}
+        footer{padding:40px 20px;background:#080714;}
+        footer .container{display:flex;justify-content:center;align-items:center;}
+        footer p{margin:0;font-size:0.9em;color:var(--secondary-color);}
+        @media (max-width:768px){h1{font-size:3em;}h2{font-size:2.5em;}.logo{font-size:1.5em;}nav .cta-button{padding:8px 18px;font-size:0.9em;}}
+        @media (max-width:340px){.zodiac-grid{grid-template-columns:repeat(auto-fit,120px);}}
+        /* Particles for cosmic effect */
+        #particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:-1;}
+        .particle{position:absolute;border-radius:50%;background:rgba(255,255,255,0.1);animation:particles 20s linear infinite;}
+        @keyframes particles{0%{transform:translate(0,0);}100%{transform:translate(var(--tx),var(--ty));}}
     </style>
 </head>
 <body>
     <nav id="navbar">
         <div class="container">
             <a href="#hero" class="logo">AstrologyScienceBot</a>
-            <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">Запустить</a>
+            <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button" aria-label="Запустить бота">Запустить</a>
         </div>
     </nav>
-
+    <div id="particles"></div>
     <main>
         <section id="hero">
             <div class="container">
                 <h1><span class="typing-effect"></span></h1>
                 <p class="subtitle">Получайте точные и подробные гороскопы прямо в мессенджер — ежедневно, еженедельно и в удобное для вас время.</p>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">🔮 Получить свой гороскоп</a>
+                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button" aria-label="Получить гороскоп">🔮 Получить свой гороскоп</a>
             </div>
         </section>
-
         <section id="features">
             <div class="container">
                 <h2>Всё, что нужно, в одном месте</h2>
                 <div class="features-grid">
-                     <div class="feature-card">
+                    <div class="feature-card">
                         <div class="icon">🔮</div>
                         <h3>Все виды гороскопов</h3>
                         <p>Получайте ежедневные, еженедельные, ежемесячные и даже годовые прогнозы, чтобы всегда быть на шаг впереди.</p>
@@ -331,84 +112,53 @@
                 </div>
             </div>
         </section>
-
-         <section id="zodiac">
+        <section id="examples">
             <div class="container">
-                <h2>12 знаков — 12 уникальных путей</h2>
-                <div class="zodiac-grid">
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♈ Овен</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♉ Телец</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♊ Близнецы</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♋ Рак</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♌ Лев</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♍ Дева</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♎ Весы</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♏ Скорпион</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♐ Стрелец</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♑ Козерог</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♒ Водолей</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♓ Рыбы</div></a>
+                <h2>Примеры гороскопов</h2>
+                <div class="example-horoscope">
+                    <h3>Овен на сегодня</h3>
+                    <p>Звёзды советуют быть смелее в решениях. В любви ждёт приятный сюрприз, а в карьере — новые возможности.</p>
+                </div>
+                <div class="example-horoscope">
+                    <h3>Рыбы на неделю</h3>
+                    <p>Фокус на здоровье: больше отдыха. Финансы стабилизируются к концу недели.</p>
                 </div>
             </div>
         </section>
-
+        <section id="zodiac">
+            <div class="container">
+                <h2>12 знаков — 12 уникальных путей</h2>
+                <div class="zodiac-grid">
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Овна"><div class="zodiac-sign">♈ Овен</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Тельца"><div class="zodiac-sign">♉ Телец</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Близнецов"><div class="zodiac-sign">♊ Близнецы</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Рака"><div class="zodiac-sign">♋ Рак</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Льва"><div class="zodiac-sign">♌ Лев</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Девы"><div class="zodiac-sign">♍ Дева</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Весов"><div class="zodiac-sign">♎ Весы</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Скорпиона"><div class="zodiac-sign">♏ Скорпион</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Стрельца"><div class="zodiac-sign">♐ Стрелец</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Козерога"><div class="zodiac-sign">♑ Козерог</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Водолея"><div class="zodiac-sign">♒ Водолей</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link" aria-label="Гороскоп для Рыб"><div class="zodiac-sign">♓ Рыбы</div></a>
+                </div>
+            </div>
+        </section>
         <section id="final-cta">
             <div class="container">
                 <h2>Готовы узнать, что приготовили для вас звёзды?</h2>
                 <p>Ваш ежедневный путеводитель по звёздам уже ждёт вас. Первый гороскоп можно получить сразу после запуска.</p>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">✨ Начать получать гороскопы</a>
+                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button" aria-label="Начать получать гороскопы">✨ Начать получать гороскопы</a>
             </div>
         </section>
     </main>
-    
     <footer>
         <div class="container">
             <p>© 2025 Adson™. Все права защищены.</p>
         </div>
     </footer>
-
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-        const typingElement = document.querySelector('.typing-effect');
-        const textToType = "Ваш персональный астролог";
-        let index = 0;
-        function type() {
-            if (index < textToType.length) {
-                typingElement.textContent += textToType.charAt(index);
-                index++;
-                setTimeout(type, 100);
-            }
-        }
-        type();
-        
-        const sections = document.querySelectorAll('section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        let lastScrollTop = 0;
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop && scrollTop > navbar.offsetHeight) {
-                navbar.style.top = '-80px';
-            } else {
-                navbar.style.top = '0';
-            }
-            lastScrollTop = scrollTop;
-        });
-
-    });
+        document.addEventListener('DOMContentLoaded',()=>{const typingElement=document.querySelector('.typing-effect');const textToType="Ваш персональный астролог";let index=0;function type(){if(index<textToType.length){typingElement.textContent+=textToType.charAt(index);index++;setTimeout(type,80);}}type();const sections=document.querySelectorAll('section');const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');}})},{threshold:0.1});sections.forEach(section=>{observer.observe(section);});let lastScrollTop=0;const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{let scrollTop=window.pageYOffset||document.documentElement.scrollTop;if(scrollTop>lastScrollTop&&scrollTop>navbar.offsetHeight){navbar.style.top='-80px';}else{navbar.style.top='0';}lastScrollTop=scrollTop;});// Particles const particlesContainer=document.getElementById('particles');for(let i=0;i<50;i++){const particle=document.createElement('div');particle.classList.add('particle');particle.style.width=particle.style.height=Math.random()*3+1+'px';particle.style.left=Math.random()*100+'%';particle.style.top=Math.random()*100+'%';particle.style.setProperty('--tx',Math.random()*200-100+'vw');particle.style.setProperty('--ty',Math.random()*200-100+'vh');particle.style.animationDuration=Math.random()*10+10+'s';particlesContainer.appendChild(particle);}});
     </script>
-
 </body>
 </html>
