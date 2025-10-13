@@ -19,7 +19,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -79,6 +79,7 @@
             font-size: 3.8em;
             font-weight: 900;
             margin-bottom: 20px;
+            display: inline-block;
         }
 
         h2 {
@@ -161,6 +162,7 @@
             min-height: 100vh;
             background: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(135deg, #1a1a3a, #0d0c1d 70%);
             padding-top: 80px;
+            text-align: center;
         }
         
         #hero .subtitle {
@@ -216,8 +218,7 @@
         
         .zodiac-grid {
             display: grid;
-            justify-content: center;
-            grid-template-columns: repeat(auto-fit, 140px);
+            grid-template-columns: repeat(6, 1fr); /* ИСПРАВЛЕНИЕ ЗДЕСЬ */
             gap: 15px;
             margin-top: 40px;
         }
@@ -244,15 +245,12 @@
              transform: scale(1.1);
              box-shadow: 0 0 15px var(--button-bg);
         }
-
-        /* === ИЗМЕНЕНИЕ ЗДЕСЬ === */
+        
         footer {
             padding: 40px 20px;
             background-color: #080714;
-            /* text-align: center; убран отсюда */
         }
         
-        /* Новый, более надежный способ центрирования */
         footer .container {
             display: flex;
             justify-content: center;
@@ -263,7 +261,6 @@
             margin: 0;
             font-size: 0.9em;
             color: var(--secondary-color);
-            /* text-align: center; убран и отсюда */
         }
         
         @media (max-width: 768px) {
@@ -277,6 +274,10 @@
             nav .cta-button {
                 padding: 8px 18px;
                 font-size: 0.9em;
+            }
+            .zodiac-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                justify-content: center;
             }
         }
 
