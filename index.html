@@ -161,6 +161,7 @@
             min-height: 100vh;
             background: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(135deg, #1a1a3a, #0d0c1d 70%);
             padding-top: 80px;
+            text-align: center; /* ИСПРАВЛЕНИЕ ЗДЕСЬ */
         }
         
         #hero .subtitle {
@@ -244,15 +245,12 @@
              transform: scale(1.1);
              box-shadow: 0 0 15px var(--button-bg);
         }
-
-        /* === ИЗМЕНЕНИЕ ЗДЕСЬ === */
+        
         footer {
             padding: 40px 20px;
             background-color: #080714;
-            /* text-align: center; убран отсюда */
         }
         
-        /* Новый, более надежный способ центрирования */
         footer .container {
             display: flex;
             justify-content: center;
@@ -263,7 +261,6 @@
             margin: 0;
             font-size: 0.9em;
             color: var(--secondary-color);
-            /* text-align: center; убран и отсюда */
         }
         
         @media (max-width: 768px) {
