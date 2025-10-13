@@ -551,7 +551,8 @@
             let index = 0;
             function type() {
                 if (index < textToType.length) {
-                    typingElement.textContent += textToToType.charAt(index);
+                    // *** THIS LINE IS NOW CORRECTED ***
+                    typingElement.textContent += textToType.charAt(index);
                     index++;
                     setTimeout(type, 150);
                 } else {
