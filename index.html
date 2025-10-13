@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AstrologyScienceBot - Ваш персональный гороскоп в Telegram</title>
+    
+    <title>AstrologyScienceBot — Ежедневный гороскоп в вашем Telegram</title>
+    <meta name="description" content="Получайте точный ежедневный, еженедельный и годовой гороскоп для всех знаков зодиака прямо в Telegram. Персональные настройки времени и уведомлений. Запустите AstrologyScienceBot бесплатно!">
+    <meta name="keywords" content="гороскоп, телеграм бот, ежедневный гороскоп, астрология, знак зодиака, гороскоп на сегодня, AstrologyScienceBot, точный гороскоп, астрологический прогноз">
+    <meta name="author" content="Adson">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="AstrologyScienceBot — Ваш персональный астролог в Telegram">
+    <meta property="og:description" content="Точные гороскопы на каждый день с персональной настройкой. Узнайте, что говорят звезды, прямо в вашем мессенджере!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://adatumwk.github.io/Asro/">
+    <meta property="og:image" content="https://adatumwk.github.io/Asro/preview.jpg"> 
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
     
@@ -11,6 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
+        /* ... ваши стили остаются без изменений ... */
         :root {
             --primary-color: #f0f0f8;
             --secondary-color: #a9a9d4;
@@ -137,7 +149,6 @@
             text-decoration: none;
         }
         
-        /* === ИЗМЕНЕНИЕ 2: Стили для кнопки в навигации === */
         nav .cta-button {
             padding: 10px 25px;
             font-size: 1em;
@@ -207,7 +218,7 @@
         .zodiac-grid {
             display: grid;
             justify-content: center;
-            grid-template-columns: repeat(auto-fit, 140px); /* === ИЗМЕНЕНИЕ 1: Задаем ширину колонок === */
+            grid-template-columns: repeat(auto-fit, 140px);
             gap: 15px;
             margin-top: 40px;
         }
@@ -217,15 +228,15 @@
         }
 
         .zodiac-sign {
-            font-size: 1.1em; /* Немного уменьшен шрифт для лучшего вида */
+            font-size: 1.1em;
             background-color: var(--card-bg);
-            padding: 15px 10px; /* Скорректированы отступы */
+            padding: 15px 10px;
             border-radius: 50px;
             border: 1px solid var(--card-border);
             transition: all 0.3s ease;
             cursor: pointer;
             color: var(--primary-color);
-            display: flex; /* Для центрирования */
+            display: flex;
             align-items: center;
             justify-content: center;
         }
@@ -251,26 +262,24 @@
             h1 { font-size: 2.8em; }
             h2 { font-size: 2.2em; }
             
-            /* === ИЗМЕНЕНИЕ 2: Оптимизация навигации для мобильных === */
             .logo { 
-                font-size: 1.2em; /* Уменьшаем лого */
+                font-size: 1.2em;
                 font-weight: 700;
             }
             nav .cta-button {
-                padding: 8px 18px; /* Уменьшаем кнопку */
+                padding: 8px 18px;
                 font-size: 0.9em;
             }
         }
 
         @media (max-width: 340px) {
             .zodiac-grid {
-                 grid-template-columns: repeat(auto-fit, 120px); /* Для очень узких экранов */
+                 grid-template-columns: repeat(auto-fit, 120px);
             }
         }
     </style>
 </head>
 <body>
-
     <nav id="navbar">
         <div class="container">
             <a href="#hero" class="logo">AstrologyScienceBot</a>
@@ -278,69 +287,71 @@
         </div>
     </nav>
 
-    <section id="hero">
-        <div class="container">
-            <h1><span class="typing-effect"></span></h1>
-            <p class="subtitle">Получайте точные и подробные гороскопы прямо в мессенджер — ежедневно, еженедельно и в удобное для вас время.</p>
-            <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">🔮 Получить свой гороскоп</a>
-        </div>
-    </section>
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h1><span class="typing-effect"></span></h1>
+                <p class="subtitle">Получайте точные и подробные гороскопы прямо в мессенджер — ежедневно, еженедельно и в удобное для вас время.</p>
+                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">🔮 Получить свой гороскоп</a>
+            </div>
+        </section>
 
-    <section id="features">
-        <div class="container">
-            <h2>Всё, что нужно, в одном месте</h2>
-            <div class="features-grid">
-                 <div class="feature-card">
-                    <div class="icon">🔮</div>
-                    <h3>Все виды гороскопов</h3>
-                    <p>Получайте ежедневные, еженедельные, ежемесячные и даже годовые прогнозы, чтобы всегда быть на шаг впереди.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">⚙️</div>
-                    <h3>Гибкая настройка</h3>
-                    <p>Выберите свой знак зодиака, удобное время и часовой пояс. Бот будет присылать гороскоп именно тогда, когда вам это нужно.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">📲</div>
-                    <h3>Удобство Telegram</h3>
-                    <p>Никаких сайтов, рекламы и лишних кликов. Ваш гороскоп всегда под рукой в любимом мессенджере.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">❤️</div>
-                    <h3>Подробные прогнозы</h3>
-                    <p>Узнайте, что ждёт вас не только в общих чертах, но и в сферах любви, карьеры, здоровья и финансов.</p>
+        <section id="features">
+            <div class="container">
+                <h2>Всё, что нужно, в одном месте</h2>
+                <div class="features-grid">
+                     <div class="feature-card">
+                        <div class="icon">🔮</div>
+                        <h3>Все виды гороскопов</h3>
+                        <p>Получайте ежедневные, еженедельные, ежемесячные и даже годовые прогнозы, чтобы всегда быть на шаг впереди.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">⚙️</div>
+                        <h3>Гибкая настройка</h3>
+                        <p>Выберите свой знак зодиака, удобное время и часовой пояс. Бот будет присылать гороскоп именно тогда, когда вам это нужно.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📲</div>
+                        <h3>Удобство Telegram</h3>
+                        <p>Никаких сайтов, рекламы и лишних кликов. Ваш гороскоп всегда под рукой в любимом мессенджере.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">❤️</div>
+                        <h3>Подробные прогнозы</h3>
+                        <p>Узнайте, что ждёт вас не только в общих чертах, но и в сферах любви, карьеры, здоровья и финансов.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-     <section id="zodiac">
-        <div class="container">
-            <h2>12 знаков — 12 уникальных путей</h2>
-            <div class="zodiac-grid">
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♈ Овен</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♉ Телец</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♊ Близнецы</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♋ Рак</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♌ Лев</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♍ Дева</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♎ Весы</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♏ Скорпион</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♐ Стрелец</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♑ Козерог</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♒ Водолей</div></a>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♓ Рыбы</div></a>
+         <section id="zodiac">
+            <div class="container">
+                <h2>12 знаков — 12 уникальных путей</h2>
+                <div class="zodiac-grid">
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♈ Овен</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♉ Телец</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♊ Близнецы</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♋ Рак</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♌ Лев</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♍ Дева</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♎ Весы</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♏ Скорпион</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♐ Стрелец</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♑ Козерог</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♒ Водолей</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♓ Рыбы</div></a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="final-cta">
-        <div class="container">
-            <h2>Готовы узнать, что приготовили для вас звёзды?</h2>
-            <p>Ваш ежедневный путеводитель по звёздам уже ждёт вас. Первый гороскоп можно получить сразу после запуска.</p>
-            <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">✨ Начать получать гороскопы</a>
-        </div>
-    </section>
+        <section id="final-cta">
+            <div class="container">
+                <h2>Готовы узнать, что приготовили для вас звёзды?</h2>
+                <p>Ваш ежедневный путеводитель по звёздам уже ждёт вас. Первый гороскоп можно получить сразу после запуска.</p>
+                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">✨ Начать получать гороскопы</a>
+            </div>
+        </section>
+    </main>
     
     <footer>
         <div class="container">
@@ -349,6 +360,7 @@
     </footer>
 
     <script>
+    // ... ваш javascript остается без изменений ...
     document.addEventListener('DOMContentLoaded', function() {
 
         const typingElement = document.querySelector('.typing-effect');
