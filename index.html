@@ -136,6 +136,12 @@
             color: var(--primary-color);
             text-decoration: none;
         }
+        
+        /* === ИЗМЕНЕНИЕ 2: Стили для кнопки в навигации === */
+        nav .cta-button {
+            padding: 10px 25px;
+            font-size: 1em;
+        }
 
         #hero {
             display: flex;
@@ -199,9 +205,9 @@
         }
         
         .zodiac-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
             justify-content: center;
+            grid-template-columns: repeat(auto-fit, 140px); /* === ИЗМЕНЕНИЕ 1: Задаем ширину колонок === */
             gap: 15px;
             margin-top: 40px;
         }
@@ -211,14 +217,17 @@
         }
 
         .zodiac-sign {
-            font-size: 1.2em;
+            font-size: 1.1em; /* Немного уменьшен шрифт для лучшего вида */
             background-color: var(--card-bg);
-            padding: 15px 25px;
+            padding: 15px 10px; /* Скорректированы отступы */
             border-radius: 50px;
             border: 1px solid var(--card-border);
             transition: all 0.3s ease;
             cursor: pointer;
             color: var(--primary-color);
+            display: flex; /* Для центрирования */
+            align-items: center;
+            justify-content: center;
         }
         .zodiac-sign:hover {
              background-color: var(--button-bg);
@@ -241,8 +250,22 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.8em; }
             h2 { font-size: 2.2em; }
-            .logo { font-size: 1.5em; }
-            .cta-button { padding: 14px 30px; font-size: 1.1em; }
+            
+            /* === ИЗМЕНЕНИЕ 2: Оптимизация навигации для мобильных === */
+            .logo { 
+                font-size: 1.2em; /* Уменьшаем лого */
+                font-weight: 700;
+            }
+            nav .cta-button {
+                padding: 8px 18px; /* Уменьшаем кнопку */
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 340px) {
+            .zodiac-grid {
+                 grid-template-columns: repeat(auto-fit, 120px); /* Для очень узких экранов */
+            }
         }
     </style>
 </head>
@@ -250,7 +273,7 @@
 
     <nav id="navbar">
         <div class="container">
-            <a href="#hero" class="logo">Astrology Science</a>
+            <a href="#hero" class="logo">AstrologyScienceBot</a>
             <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">Запустить</a>
         </div>
     </nav>
