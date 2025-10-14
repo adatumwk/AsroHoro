@@ -217,14 +217,18 @@
         }
         
         .zodiac-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 15px;
             margin-top: 40px;
         }
 
         .zodiac-link {
             text-decoration: none;
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: calc(16.666% - 15px * 5 / 6); /* Approx for 6 columns */
         }
 
         .zodiac-sign {
@@ -239,6 +243,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 100%;
+            box-sizing: border-box;
+            white-space: nowrap;
         }
         .zodiac-sign:hover {
              background-color: var(--button-bg);
@@ -264,8 +271,8 @@
         }
         
         @media (max-width: 1024px) {
-            .zodiac-grid {
-                grid-template-columns: repeat(4, 1fr);
+            .zodiac-link {
+                flex-basis: calc(25% - 15px * 3 / 4); /* For 4 columns */
             }
         }
 
@@ -281,9 +288,8 @@
                 padding: 8px 18px;
                 font-size: 0.9em;
             }
-            .zodiac-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                justify-content: center;
+            .zodiac-link {
+                flex-basis: calc(33.333% - 15px * 2 / 3); /* For 3 columns */
             }
             .features-grid {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -308,8 +314,10 @@
             .feature-card h3 { font-size: 1.3em; }
             .feature-card p { font-size: 0.9em; }
             .zodiac-grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                 gap: 10px;
+            }
+            .zodiac-link {
+                flex-basis: calc(50% - 10px / 2); /* For 2 columns */
             }
             .zodiac-sign {
                 font-size: 1em;
@@ -419,6 +427,8 @@
                 typingElement.textContent += textToType.charAt(index);
                 index++;
                 setTimeout(type, 100);
+            } else {
+                typingElement.style.setProperty('--after-content', 'none'); // Optional: remove cursor after typing
             }
         }
         type();
