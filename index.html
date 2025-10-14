@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>AstrologyScienceBot — Ежедневный гороскоп в вашем Telegram</title>
     <meta name="description" content="Получайте точный ежедневный, еженедельный и годовой гороскоп для всех знаков зодиака прямо в Telegram. Персональные настройки времени и уведомлений. Запустите AstrologyScienceBot бесплатно!">
@@ -19,7 +19,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -218,7 +218,7 @@
         
         .zodiac-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr); /* ИСПРАВЛЕНИЕ ЗДЕСЬ */
+            grid-template-columns: repeat(6, 1fr);
             gap: 15px;
             margin-top: 40px;
         }
@@ -263,6 +263,12 @@
             color: var(--secondary-color);
         }
         
+        @media (max-width: 1024px) {
+            .zodiac-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.8em; }
             h2 { font-size: 2.2em; }
@@ -279,11 +285,45 @@
                 grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
                 justify-content: center;
             }
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 1.1em;
+            }
+            section {
+                padding: 60px 15px;
+            }
         }
 
-        @media (max-width: 340px) {
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.8em; }
+            p { font-size: 1em; }
+            .subtitle { font-size: 1.2em; }
+            .feature-card {
+                padding: 30px 20px;
+            }
+            .feature-card h3 { font-size: 1.3em; }
+            .feature-card p { font-size: 0.9em; }
             .zodiac-grid {
-                 grid-template-columns: repeat(auto-fit, 120px);
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 10px;
+            }
+            .zodiac-sign {
+                font-size: 1em;
+                padding: 12px 8px;
+            }
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            nav .container {
+                padding: 0 15px;
+            }
+            section {
+                padding: 50px 10px;
             }
         }
     </style>
