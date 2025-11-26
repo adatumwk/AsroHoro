@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroBot - Твой персональный астролог</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">✨ AstroBot</div>
+        <div class="lang-switch">
+            <select id="language-selector">
+                <option value="ru">🇷🇺 RU</option>
+                <option value="en">🇺🇸 EN</option>
+                <option value="de">🇩🇪 DE</option>
+                <option value="es">🇪🇸 ES</option>
+                <option value="fr">🇫🇷 FR</option>
+            </select>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="content">
+            <h1 data-i18n="hero_title">Твой персональный Астролог в Telegram</h1>
+            <p data-i18n="hero_subtitle">Точные прогнозы, натальные карты, синастрия и цифровая психология Сюцай — всё в одном боте.</p>
+            <a href="https://t.me/YOUR_BOT_USERNAME" class="cta-button" target="_blank" data-i18n="btn_start">Запустить в Telegram</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <div class="icon">📊</div>
+            <h3 data-i18n="feat_1_title">Натальная карта</h3>
+            <p data-i18n="feat_1_desc">Глубокий анализ вашей личности: карьера, отношения, предназначение.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">📅</div>
+            <h3 data-i18n="feat_2_title">Прогноз на день</h3>
+            <p data-i18n="feat_2_desc">Персональные транзиты планет и советы на каждый день.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">🔢</div>
+            <h3 data-i18n="feat_3_title">Сюцай и Нумерология</h3>
+            <p data-i18n="feat_3_desc">Узнайте свое Число Сознания и Миссии. Психология цифр.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon">❤️</div>
+            <h3 data-i18n="feat_4_title">Совместимость</h3>
+            <p data-i18n="feat_4_desc">Проверьте совместимость с партнером по звездам и дате рождения.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Adson™. <span data-i18n="footer_rights">Все права защищены.</span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
