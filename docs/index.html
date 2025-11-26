@@ -3,13 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AstroBot - Твой персональный астролог</title>
+    <title>AstroBot - AI Astrologer</title>
+    <meta name="description" content="Персональный гороскоп, Соляр, Сюцай и Совместимость в Telegram. Точные расчеты и AI-интерпретация.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WWLP95M48S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-WWLP95M48S');
+    </script>
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104645689', 'ym');
+        ym(104645689, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
 </head>
 <body>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104645689" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
-    <header>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+
+    <header id="navbar">
         <div class="logo">✨ AstroBot</div>
         <div class="lang-switch">
             <select id="language-selector">
@@ -24,37 +50,69 @@
 
     <section class="hero">
         <div class="content">
-            <h1 data-i18n="hero_title">Твой персональный Астролог в Telegram</h1>
-            <p data-i18n="hero_subtitle">Точные прогнозы, натальные карты, синастрия и цифровая психология Сюцай — всё в одном боте.</p>
-            <a href="https://t.me/YOUR_BOT_USERNAME" class="cta-button" target="_blank" data-i18n="btn_start">Запустить в Telegram</a>
+            <h1 data-i18n="hero_title">Твой персональный Астролог</h1>
+            
+            <div class="typing-container">
+                <span class="typing-text"></span><span class="cursor">|</span>
+            </div>
+
+            <p class="subtitle" data-i18n="hero_subtitle">
+                Астрология, Сюцай, Соляр и Совместимость в одном Telegram-боте.
+            </p>
+            
+            <a href="https://t.me/Astrologyscience_bot" class="cta-button" target="_blank">
+                <span data-i18n="btn_start">Запустить в Telegram</span> 🚀
+            </a>
         </div>
     </section>
 
     <section class="features">
-        <div class="feature-card">
-            <div class="icon">📊</div>
-            <h3 data-i18n="feat_1_title">Натальная карта</h3>
-            <p data-i18n="feat_1_desc">Глубокий анализ вашей личности: карьера, отношения, предназначение.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">📅</div>
-            <h3 data-i18n="feat_2_title">Прогноз на день</h3>
-            <p data-i18n="feat_2_desc">Персональные транзиты планет и советы на каждый день.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🔢</div>
-            <h3 data-i18n="feat_3_title">Сюцай и Нумерология</h3>
-            <p data-i18n="feat_3_desc">Узнайте свое Число Сознания и Миссии. Психология цифр.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">❤️</div>
-            <h3 data-i18n="feat_4_title">Совместимость</h3>
-            <p data-i18n="feat_4_desc">Проверьте совместимость с партнером по звездам и дате рождения.</p>
+        <h2 data-i18n="features_title">Что умеет бот?</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="icon">📊</div>
+                <h3 data-i18n="feat_natal_title">Астро-Портрет</h3>
+                <p data-i18n="feat_natal_desc">Глубокий разбор личности: карьера, деньги, отношения и предназначение по натальной карте.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">📅</div>
+                <h3 data-i18n="feat_daily_title">Прогноз на день</h3>
+                <p data-i18n="feat_daily_desc">Персональные советы на каждый день, основанные на движении планет.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔢</div>
+                <h3 data-i18n="feat_numerology_title">Сюцай и Числа</h3>
+                <p data-i18n="feat_numerology_desc">Цифровая психология. Узнай свое Число Сознания, Миссию и как прийти к успеху.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">☀️</div>
+                <h3 data-i18n="feat_solar_title">Соляр (Прогноз на год)</h3>
+                <p data-i18n="feat_solar_desc">Стратегия твоего личного года. Узнай главные тренды от дня рождения до дня рождения.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">💞</div>
+                <h3 data-i18n="feat_compat_title">Совместимость</h3>
+                <p data-i18n="feat_compat_desc">Проверь партнера по звездам: любовь, бизнес, дружба и подводные камни.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">💬</div>
+                <h3 data-i18n="feat_ask_title">Вопрос Астрологу</h3>
+                <p data-i18n="feat_ask_desc">Задай конкретный вопрос AI-астрологу и получи мгновенный ответ по своей карте.</p>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p>© 2024 Adson™. <span data-i18n="footer_rights">Все права защищены.</span></p>
+        <p>© 2025 AstrologyScience. <span data-i18n="footer_rights">Все права защищены.</span></p>
+        <div class="socials">
+            <a href="https://t.me/Astrologyscience_bot" target="_blank">Telegram Bot</a>
+        </div>
     </footer>
 
     <script src="script.js"></script>
