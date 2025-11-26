@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-WWLP95M48S"></script>
@@ -9,7 +9,7 @@
       gtag('js', new Date());
       gtag('config', 'G-WWLP95M48S');
     </script>
-     <script type="text/javascript">
+    <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
             m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
             m[i].l=1*new Date();
@@ -19,18 +19,18 @@
         ym(104645689, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/104645689" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>AstrologyScienceBot — Астрология, Сюцай и Совместимость в Telegram</title>
+    <title>AstrologyScienceBot — AI Astrology & Compatibility</title>
     
-    <meta name="description" content="У вашей судьбы есть алгоритм и я помогу его расшифровать. Я — современная система аналитической астрологии. В моем ядре: точные астрономические данные NASA и сложные алгоритмы расчета судьбы. Никакой мистики и размытых фраз — только факты и стратегия.">
-    
-    <meta name="keywords" content="гороскоп, телеграм бот, персональный гороскоп, астролог, натальная карта, соляр, сюцай, совместимость, синастрия, нумерология, AstrologyScienceBot, точный прогноз">
+    <meta name="description" content="Your destiny has an algorithm. Detailed natal charts, synastry, and daily forecasts in Telegram.">
+    <meta name="keywords" content="horoscope, telegram bot, astrology, natal chart, synastry, numerology, AstrologyScienceBot">
     <meta name="author" content="Adson">
     <meta name="robots" content="index, follow">
 
-    <meta property="og:title" content="AstrologyScienceBot — Ваш персональный астролог">
-    <meta property="og:description" content="Натальная карта, Соляр, Сюцай, Совместимость и ежедневные прогнозы внутри Telegram.">
+    <meta property="og:title" content="AstrologyScienceBot — AI Astrology">
+    <meta property="og:description" content="Natal charts, Synastry, and daily forecasts inside Telegram.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://astrologyscience.ru/">
     <meta property="og:image" content="https://astrologyscience.ru/preview.jpg"> 
@@ -52,9 +52,7 @@
             --card-border: rgba(108, 99, 255, 0.3);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             margin: 0;
@@ -100,6 +98,7 @@
             font-weight: 900;
             margin-bottom: 20px;
             display: inline-block;
+            min-height: 1.2em; /* Prevent layout shift during typing */
         }
 
         h2 {
@@ -152,7 +151,7 @@
             width: 100%;
             padding: 15px 0;
             z-index: 1000;
-            background: rgba(13, 12, 29, 0.8);
+            background: rgba(13, 12, 29, 0.9);
             backdrop-filter: blur(10px);
             transition: top 0.3s;
         }
@@ -160,6 +159,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         .logo {
             font-family: 'Montserrat', sans-serif;
@@ -169,6 +173,56 @@
             text-decoration: none;
         }
         
+        /* Language Switcher Styles */
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-btn {
+            background: transparent;
+            color: var(--secondary-color);
+            border: 1px solid var(--card-border);
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+        .lang-btn:hover {
+            color: white;
+            border-color: var(--button-bg);
+        }
+        .lang-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #1a1a3a;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 5px;
+            min-width: 120px;
+        }
+        .lang-switcher:hover .lang-menu {
+            display: block;
+        }
+        .lang-option {
+            display: block;
+            width: 100%;
+            padding: 8px 15px;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .lang-option:hover {
+            background-color: var(--button-bg);
+            color: white;
+        }
+
         nav .cta-button {
             padding: 10px 25px;
             font-size: 1em;
@@ -364,6 +418,7 @@
             nav .cta-button {
                 padding: 8px 18px;
                 font-size: 0.9em;
+                display: none; /* Hide top CTA on small mobile to save space */
             }
             .zodiac-link {
                 flex-basis: calc(33.333% - 15px * 2 / 3);
@@ -433,41 +488,52 @@
 <body>
     <nav id="navbar">
         <div class="container">
-            <a href="https://astrologyscience.ru/#hero" class="logo">Astrology Science</a>
-            <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">Запустить</a>
+            <a href="#hero" class="logo">Astrology Science</a>
+            <div class="nav-right">
+                <div class="lang-switcher">
+                    <button class="lang-btn" id="current-lang">EN ▾</button>
+                    <div class="lang-menu">
+                        <button class="lang-option" onclick="changeLanguage('en')">English</button>
+                        <button class="lang-option" onclick="changeLanguage('ru')">Русский</button>
+                        <button class="lang-option" onclick="changeLanguage('de')">Deutsch</button>
+                        <button class="lang-option" onclick="changeLanguage('es')">Español</button>
+                        <button class="lang-option" onclick="changeLanguage('fr')">Français</button>
+                    </div>
+                </div>
+                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button" data-i18n="nav_start">Start</a>
+            </div>
         </div>
     </nav>
 
     <main>
         <section id="hero" class="visible">
             <div class="container">
-                <h1><span class="typing-effect" style="--after-content: none;">Ваш персональный астролог</span></h1>
+                <h1><span class="typing-effect" style="--after-content: none;"></span></h1>
                 
                 <p class="subtitle">
-                    <strong>У вашей судьбы есть алгоритм и я помогу его расшифровать.</strong><br>
-                    Я — современная система аналитической астрологии.<br>
-                    В моем ядре: точные астрономические данные NASA и сложные алгоритмы расчета судьбы. Никакой мистики и размытых фраз — только факты и стратегия."
+                    <strong data-i18n="hero_subtitle_bold">Your destiny has an algorithm, and I will help you decode it.</strong><br>
+                    <span data-i18n="hero_desc_1">I am a modern analytical astrology system.</span><br>
+                    <span data-i18n="hero_desc_2">In my core: precise NASA astronomical data and complex destiny calculation algorithms. No mysticism or vague phrases — only facts and strategy.</span>
                 </p>
                 
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">🔮 Получить прогноз</a>
+                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button" data-i18n="hero_cta">🔮 Get Forecast</a>
             </div>
         </section>
       
         <section id="ai-feature">
             <div class="container">
-                <h2>Раскройте свой потенциал с помощью точных расчетов</h2>
+                <h2 data-i18n="ai_title">Unlock your potential with precise calculations</h2>
                 <div class="ai-container">
                     <div class="ai-icon">🌟</div>
                     <div class="ai-text">
-                        <h3>Профессиональные инструменты</h3>
-                        <!-- <p>Укажите <strong>дату, время и город рождения</strong>, чтобы система рассчитала вашу натальную карту и открыла доступ к PRO-функциям:</p> -->
+                        <h3 data-i18n="ai_subtitle">Professional Tools</h3>
                         <ul>
-                            <li><strong>📊 Астро-портрет:</strong> Глубокий анализ вашего характера, сильных сторон и кармических задач.</li>
-                            <li><strong>📅 Транзиты (Прогноз на день):</strong> Персональный гороскоп, основанный на реальном движении планет относительно вашей карты.</li>
-                            <li><strong>❤️ Совместимость (Синастрия):</strong> Узнайте перспективы отношений с партнером (любовь, бизнес, конфликты).</li>
-                            <li><strong>☀️ Соляр (Прогноз на год):</strong> Ваша личная стратегия на год от дня рождения до дня рождения.</li>
-                            <li><strong>🧠 Сюцай (Нумерология):</strong> Узнайте ваше Число Сознания и Число Миссии для финансового роста.</li>
-                            <li><strong>💬 Вопрос Астрологу:</strong> Задайте любой вопрос и получите конкретный ответ на основе вашей карты.</li>
+                            <li data-i18n="ai_li_1"><strong>📊 Astro-Portrait:</strong> Deep analysis of your character, strengths, and karmic tasks.</li>
+                            <li data-i18n="ai_li_2"><strong>📅 Transits (Daily Forecast):</strong> Personal horoscope based on real planet movements relative to your chart.</li>
+                            <li data-i18n="ai_li_3"><strong>❤️ Compatibility (Synastry):</strong> Discover relationship prospects with a partner (love, business, conflicts).</li>
+                            <li data-i18n="ai_li_4"><strong>☀️ Solar (Yearly Forecast):</strong> Your personal strategy for the year from birthday to birthday.</li>
+                            <li data-i18n="ai_li_5"><strong>🧠 Syutsai (Numerology):</strong> Find out your Consciousness Number and Mission Number for financial growth.</li>
+                            <li data-i18n="ai_li_6"><strong>💬 Ask Astrologer:</strong> Ask any question and get a concrete answer based on your chart.</li>
                         </ul>
                     </div>
                 </div>
@@ -475,48 +541,48 @@
         </section>
         <section id="zodiac">
             <div class="container">
-                <h2>12 знаков — 12 уникальных путей</h2>
-                <p>Выберите свой знак для получения общего гороскопа или запустите бота для персонального расчета.</p>
+                <h2 data-i18n="zodiac_title">12 Signs — 12 Unique Paths</h2>
+                <p data-i18n="zodiac_desc">Choose your sign for a general horoscope or launch the bot for a personal calculation.</p>
                 <div class="zodiac-grid">
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♈ Овен</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♉ Телец</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♊ Близнецы</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♋ Рак</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♌ Лев</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♍ Дева</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♎ Весы</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♏ Скорпион</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♐ Стрелец</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♑ Козерог</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♒ Водолей</div></a>
-                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign">♓ Рыбы</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_aries">♈ Aries</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_taurus">♉ Taurus</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_gemini">♊ Gemini</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_cancer">♋ Cancer</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_leo">♌ Leo</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_virgo">♍ Virgo</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_libra">♎ Libra</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_scorpio">♏ Scorpio</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_sagittarius">♐ Sagittarius</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_capricorn">♑ Capricorn</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_aquarius">♒ Aquarius</div></a>
+                    <a href="https://t.me/AstrologyScienceBot" target="_blank" class="zodiac-link"><div class="zodiac-sign" data-i18n="sign_pisces">♓ Pisces</div></a>
                 </div>
             </div>
         </section>
 
         <section id="features">
             <div class="container">
-                <h2>Всё, что нужно, в одном месте</h2>
+                <h2 data-i18n="features_title">Everything you need in one place</h2>
                 <div class="features-grid">
                      <div class="feature-card">
                         <div class="icon">🔮</div>
-                        <h3>Общие гороскопы</h3>
-                        <p>Классические прогнозы: ежедневные, еженедельные, ежемесячные и годовые для всех знаков.</p>
+                        <h3 data-i18n="feat_1_title">General Horoscopes</h3>
+                        <p data-i18n="feat_1_desc">Classic forecasts: daily, weekly, monthly, and yearly for all signs.</p>
                     </div>
                     <div class="feature-card">
                         <div class="icon">🌍</div>
-                        <h3>5 Языков</h3>
-                        <p>Бот свободно говорит на Русском, English, Deutsch, Español и Français.</p>
+                        <h3 data-i18n="feat_2_title">5 Languages</h3>
+                        <p data-i18n="feat_2_desc">The bot speaks English, German, Spanish, French, and Russian fluently.</p>
                     </div>
                     <div class="feature-card">
                         <div class="icon">🎁</div>
-                        <h3>Бесплатный PRO</h3>
-                        <p>Приглашайте друзей через реферальную программу и получайте дни Premium-подписки бесплатно.</p>
+                        <h3 data-i18n="feat_3_title">Free PRO</h3>
+                        <p data-i18n="feat_3_desc">Invite friends via the referral program and get Premium subscription days for free.</p>
                     </div>
                     <div class="feature-card">
                         <div class="icon">📲</div>
-                        <h3>Удобство Telegram</h3>
-                        <p>Никаких сайтов и рекламы. Ежедневные уведомления приходят прямо в ваш мессенджер.</p>
+                        <h3 data-i18n="feat_4_title">Telegram Convenience</h3>
+                        <p data-i18n="feat_4_desc">No websites or ads. Daily notifications come directly to your messenger.</p>
                     </div>
                 </div>
             </div>
@@ -524,39 +590,283 @@
         
         <section id="final-cta">
             <div class="container">
-                <h2>Готовы узнать, что приготовили для вас звёзды?</h2>
-                <p>Ваш личный астролог и ежедневный путеводитель по звёздам уже ждёт вас. Запустите бота прямо сейчас.</p>
-                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button">✨ Рассчитать персональный прогноз</a>
+                <h2 data-i18n="final_title">Ready to find out what the stars have prepared?</h2>
+                <p data-i18n="final_desc">Your personal astrologer and daily guide to the stars is waiting for you. Launch the bot right now.</p>
+                <a href="https://t.me/AstrologyScienceBot" target="_blank" class="cta-button" data-i18n="final_cta">✨ Calculate Personal Forecast</a>
             </div>
         </section>
     </main>
     
     <footer>
         <div class="container">
-            <p>© 2025 Adson™. Все права защищены.</p>
+            <p>© 2025 Adson™. <span data-i18n="rights">All rights reserved.</span></p>
         </div>
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-        const typingElement = document.querySelector('.typing-effect');
-        if (typingElement) {
-            const textToType = "Ваш персональный астролог";
-            let index = 0;
-            typingElement.textContent = ''; 
-            function type() {
-                if (index < textToType.length) {
-                    typingElement.textContent += textToType.charAt(index);
-                    index++;
-                    setTimeout(type, 100);
-                } else {
-                    typingElement.style.setProperty('--after-content', 'none'); 
-                }
-            }
-            type();
+    
+    // --- Translations Database ---
+    const translations = {
+        en: {
+            meta_title: "AstrologyScienceBot — AI Astrology & Compatibility",
+            meta_desc: "Your destiny has an algorithm. Detailed natal charts, synastry, and daily forecasts in Telegram.",
+            nav_start: "Start",
+            typing_text: "Your Personal Astrologer",
+            hero_subtitle_bold: "Your destiny has an algorithm, and I will help you decode it.",
+            hero_desc_1: "I am a modern analytical astrology system.",
+            hero_desc_2: "In my core: precise NASA astronomical data and complex destiny calculation algorithms. No mysticism or vague phrases — only facts and strategy.",
+            hero_cta: "🔮 Get Forecast",
+            ai_title: "Unlock your potential with precise calculations",
+            ai_subtitle: "Professional Tools",
+            ai_li_1: "<strong>📊 Astro-Portrait:</strong> Deep analysis of your character, strengths, and karmic tasks.",
+            ai_li_2: "<strong>📅 Transits (Daily Forecast):</strong> Personal horoscope based on real planet movements relative to your chart.",
+            ai_li_3: "<strong>❤️ Compatibility (Synastry):</strong> Discover relationship prospects with a partner (love, business, conflicts).",
+            ai_li_4: "<strong>☀️ Solar (Yearly Forecast):</strong> Your personal strategy for the year from birthday to birthday.",
+            ai_li_5: "<strong>🧠 Syutsai (Numerology):</strong> Find out your Consciousness Number and Mission Number for financial growth.",
+            ai_li_6: "<strong>💬 Ask Astrologer:</strong> Ask any question and get a concrete answer based on your chart.",
+            zodiac_title: "12 Signs — 12 Unique Paths",
+            zodiac_desc: "Choose your sign for a general horoscope or launch the bot for a personal calculation.",
+            sign_aries: "♈ Aries", sign_taurus: "♉ Taurus", sign_gemini: "♊ Gemini", sign_cancer: "♋ Cancer",
+            sign_leo: "♌ Leo", sign_virgo: "♍ Virgo", sign_libra: "♎ Libra", sign_scorpio: "♏ Scorpio",
+            sign_sagittarius: "♐ Sagittarius", sign_capricorn: "♑ Capricorn", sign_aquarius: "♒ Aquarius", sign_pisces: "♓ Pisces",
+            features_title: "Everything you need in one place",
+            feat_1_title: "General Horoscopes",
+            feat_1_desc: "Classic forecasts: daily, weekly, monthly, and yearly for all signs.",
+            feat_2_title: "5 Languages",
+            feat_2_desc: "The bot speaks English, German, Spanish, French, and Russian fluently.",
+            feat_3_title: "Free PRO",
+            feat_3_desc: "Invite friends via the referral program and get Premium subscription days for free.",
+            feat_4_title: "Telegram Convenience",
+            feat_4_desc: "No websites or ads. Daily notifications come directly to your messenger.",
+            final_title: "Ready to find out what the stars have prepared?",
+            final_desc: "Your personal astrologer and daily guide to the stars is waiting for you. Launch the bot right now.",
+            final_cta: "✨ Calculate Personal Forecast",
+            rights: "All rights reserved."
+        },
+        ru: {
+            meta_title: "AstrologyScienceBot — Астрология и Совместимость",
+            meta_desc: "У вашей судьбы есть алгоритм. Натальная карта, синастрия и прогнозы в Telegram.",
+            nav_start: "Запустить",
+            typing_text: "Ваш персональный астролог",
+            hero_subtitle_bold: "У вашей судьбы есть алгоритм и я помогу его расшифровать.",
+            hero_desc_1: "Я — современная система аналитической астрологии.",
+            hero_desc_2: "В моем ядре: точные астрономические данные NASA и сложные алгоритмы расчета судьбы. Никакой мистики и размытых фраз — только факты и стратегия.",
+            hero_cta: "🔮 Получить прогноз",
+            ai_title: "Раскройте свой потенциал с помощью точных расчетов",
+            ai_subtitle: "Профессиональные инструменты",
+            ai_li_1: "<strong>📊 Астро-портрет:</strong> Глубокий анализ вашего характера, сильных сторон и кармических задач.",
+            ai_li_2: "<strong>📅 Транзиты (Прогноз на день):</strong> Персональный гороскоп, основанный на реальном движении планет относительно вашей карты.",
+            ai_li_3: "<strong>❤️ Совместимость (Синастрия):</strong> Узнайте перспективы отношений с партнером (любовь, бизнес, конфликты).",
+            ai_li_4: "<strong>☀️ Соляр (Прогноз на год):</strong> Ваша личная стратегия на год от дня рождения до дня рождения.",
+            ai_li_5: "<strong>🧠 Сюцай (Нумерология):</strong> Узнайте ваше Число Сознания и Число Миссии для финансового роста.",
+            ai_li_6: "<strong>💬 Вопрос Астрологу:</strong> Задайте любой вопрос и получите конкретный ответ на основе вашей карты.",
+            zodiac_title: "12 знаков — 12 уникальных путей",
+            zodiac_desc: "Выберите свой знак для получения общего гороскопа или запустите бота для персонального расчета.",
+            sign_aries: "♈ Овен", sign_taurus: "♉ Телец", sign_gemini: "♊ Близнецы", sign_cancer: "♋ Рак",
+            sign_leo: "♌ Лев", sign_virgo: "♍ Дева", sign_libra: "♎ Весы", sign_scorpio: "♏ Скорпион",
+            sign_sagittarius: "♐ Стрелец", sign_capricorn: "♑ Козерог", sign_aquarius: "♒ Водолей", sign_pisces: "♓ Рыбы",
+            features_title: "Всё, что нужно, в одном месте",
+            feat_1_title: "Общие гороскопы",
+            feat_1_desc: "Классические прогнозы: ежедневные, еженедельные, ежемесячные и годовые для всех знаков.",
+            feat_2_title: "5 Языков",
+            feat_2_desc: "Бот свободно говорит на Русском, English, Deutsch, Español и Français.",
+            feat_3_title: "Бесплатный PRO",
+            feat_3_desc: "Приглашайте друзей через реферальную программу и получайте дни Premium-подписки бесплатно.",
+            feat_4_title: "Удобство Telegram",
+            feat_4_desc: "Никаких сайтов и рекламы. Ежедневные уведомления приходят прямо в ваш мессенджер.",
+            final_title: "Готовы узнать, что приготовили для вас звёзды?",
+            final_desc: "Ваш личный астролог и ежедневный путеводитель по звёздам уже ждёт вас. Запустите бота прямо сейчас.",
+            final_cta: "✨ Рассчитать персональный прогноз",
+            rights: "Все права защищены."
+        },
+        de: {
+            meta_title: "AstrologyScienceBot — KI-Astrologie & Kompatibilität",
+            meta_desc: "Ihr Schicksal hat einen Algorithmus. Geburtshoroskope und tägliche Prognosen im Telegram.",
+            nav_start: "Starten",
+            typing_text: "Ihr persönlicher Astrologe",
+            hero_subtitle_bold: "Ihr Schicksal hat einen Algorithmus, und ich werde Ihnen helfen, ihn zu entschlüsseln.",
+            hero_desc_1: "Ich bin ein modernes System der analytischen Astrologie.",
+            hero_desc_2: "In meinem Kern: präzise NASA-Astronomiedaten und komplexe Schicksalsberechnungsalgorithmen. Keine Mystik oder vage Phrasen – nur Fakten und Strategie.",
+            hero_cta: "🔮 Prognose erhalten",
+            ai_title: "Entfalten Sie Ihr Potenzial durch präzise Berechnungen",
+            ai_subtitle: "Professionelle Werkzeuge",
+            ai_li_1: "<strong>📊 Astro-Porträt:</strong> Tiefe Analyse Ihres Charakters, Ihrer Stärken und karmischen Aufgaben.",
+            ai_li_2: "<strong>📅 Transite (Tagesprognose):</strong> Persönliches Horoskop basierend auf echten Planetenbewegungen.",
+            ai_li_3: "<strong>❤️ Kompatibilität (Synastrie):</strong> Beziehungsperspektiven mit einem Partner (Liebe, Geschäft, Konflikte).",
+            ai_li_4: "<strong>☀️ Solar (Jahresprognose):</strong> Ihre persönliche Strategie für das Jahr.",
+            ai_li_5: "<strong>🧠 Syutsai (Numerologie):</strong> Finden Sie Ihre Bewusstseinszahl und Missionszahl.",
+            ai_li_6: "<strong>💬 Frage an Astrologen:</strong> Stellen Sie eine Frage und erhalten Sie eine konkrete Antwort.",
+            zodiac_title: "12 Zeichen — 12 einzigartige Wege",
+            zodiac_desc: "Wählen Sie Ihr Zeichen oder starten Sie den Bot für eine persönliche Berechnung.",
+            sign_aries: "♈ Widder", sign_taurus: "♉ Stier", sign_gemini: "♊ Zwillinge", sign_cancer: "♋ Krebs",
+            sign_leo: "♌ Löwe", sign_virgo: "♍ Jungfrau", sign_libra: "♎ Waage", sign_scorpio: "♏ Skorpion",
+            sign_sagittarius: "♐ Schütze", sign_capricorn: "♑ Steinbock", sign_aquarius: "♒ Wassermann", sign_pisces: "♓ Fische",
+            features_title: "Alles, was Sie brauchen, an einem Ort",
+            feat_1_title: "Allgemeine Horoskope",
+            feat_1_desc: "Klassische Prognosen: täglich, wöchentlich, monatlich und jährlich.",
+            feat_2_title: "5 Sprachen",
+            feat_2_desc: "Der Bot spricht fließend Englisch, Deutsch, Spanisch, Französisch und Russisch.",
+            feat_3_title: "Kostenloses PRO",
+            feat_3_desc: "Laden Sie Freunde ein und erhalten Sie Premium-Tage kostenlos.",
+            feat_4_title: "Telegram-Komfort",
+            feat_4_desc: "Keine Webseiten oder Werbung. Tägliche Benachrichtigungen direkt in Ihren Messenger.",
+            final_title: "Bereit zu erfahren, was die Sterne vorbereitet haben?",
+            final_desc: "Ihr persönlicher Astrologe wartet auf Sie. Starten Sie den Bot jetzt.",
+            final_cta: "✨ Persönliche Prognose berechnen",
+            rights: "Alle Rechte vorbehalten."
+        },
+        es: {
+            meta_title: "AstrologyScienceBot — Astrología IA y Compatibilidad",
+            meta_desc: "Tu destino tiene un algoritmo. Carta natal, sinastría y pronósticos diarios en Telegram.",
+            nav_start: "Iniciar",
+            typing_text: "Tu Astrólogo Personal",
+            hero_subtitle_bold: "Tu destino tiene un algoritmo y te ayudaré a descifrarlo.",
+            hero_desc_1: "Soy un sistema moderno de astrología analítica.",
+            hero_desc_2: "En mi núcleo: datos astronómicos precisos de la NASA y algoritmos complejos. Sin misticismo ni frases vagas — solo hechos y estrategia.",
+            hero_cta: "🔮 Obtener Pronóstico",
+            ai_title: "Desbloquea tu potencial con cálculos precisos",
+            ai_subtitle: "Herramientas Profesionales",
+            ai_li_1: "<strong>📊 Astro-Retrato:</strong> Análisis profundo de tu carácter, fortalezas y tareas kármicas.",
+            ai_li_2: "<strong>📅 Tránsitos (Pronóstico Diario):</strong> Horóscopo personal basado en movimientos reales de los planetas.",
+            ai_li_3: "<strong>❤️ Compatibilidad (Sinastría):</strong> Perspectivas de relación con tu pareja (amor, negocios, conflictos).",
+            ai_li_4: "<strong>☀️ Revolución Solar:</strong> Tu estrategia personal para el año.",
+            ai_li_5: "<strong>🧠 Syutsai (Numerología):</strong> Descubre tu Número de Conciencia y Misión.",
+            ai_li_6: "<strong>💬 Pregunta al Astrólogo:</strong> Haz cualquier pregunta y obtén una respuesta concreta.",
+            zodiac_title: "12 Signos — 12 Caminos Únicos",
+            zodiac_desc: "Elige tu signo o inicia el bot para un cálculo personal.",
+            sign_aries: "♈ Aries", sign_taurus: "♉ Tauro", sign_gemini: "♊ Géminis", sign_cancer: "♋ Cáncer",
+            sign_leo: "♌ Leo", sign_virgo: "♍ Virgo", sign_libra: "♎ Libra", sign_scorpio: "♏ Escorpio",
+            sign_sagittarius: "♐ Sagitario", sign_capricorn: "♑ Capricornio", sign_aquarius: "♒ Acuario", sign_pisces: "♓ Piscis",
+            features_title: "Todo lo que necesitas en un solo lugar",
+            feat_1_title: "Horóscopos Generales",
+            feat_1_desc: "Pronósticos clásicos: diarios, semanales, mensuales y anuales.",
+            feat_2_title: "5 Idiomas",
+            feat_2_desc: "El bot habla inglés, alemán, español, francés y ruso con fluidez.",
+            feat_3_title: "PRO Gratis",
+            feat_3_desc: "Invita amigos y obtén días de suscripción Premium gratis.",
+            feat_4_title: "Comodidad de Telegram",
+            feat_4_desc: "Sin sitios web ni anuncios. Notificaciones diarias directamente a tu mensajero.",
+            final_title: "¿Listo para saber qué te deparan las estrellas?",
+            final_desc: "Tu astrólogo personal te espera. Inicia el bot ahora mismo.",
+            final_cta: "✨ Calcular Pronóstico Personal",
+            rights: "Todos los derechos reservados."
+        },
+        fr: {
+            meta_title: "AstrologyScienceBot — Astrologie IA & Compatibilité",
+            meta_desc: "Votre destin a un algorithme. Thème astral, synastrie et prévisions quotidiennes sur Telegram.",
+            nav_start: "Démarrer",
+            typing_text: "Votre Astrologue Personnel",
+            hero_subtitle_bold: "Votre destin a un algorithme et je vais vous aider à le décoder.",
+            hero_desc_1: "Je suis un système moderne d'astrologie analytique.",
+            hero_desc_2: "En mon cœur : des données astronomiques précises de la NASA et des algorithmes complexes. Pas de mysticisme — seulement des faits et une stratégie.",
+            hero_cta: "🔮 Obtenir Prévision",
+            ai_title: "Libérez votre potentiel grâce à des calculs précis",
+            ai_subtitle: "Outils Professionnels",
+            ai_li_1: "<strong>📊 Astro-Portrait :</strong> Analyse approfondie de votre caractère et de vos tâches karmiques.",
+            ai_li_2: "<strong>📅 Transits (Prévision Quotidienne) :</strong> Horoscope personnel basé sur les mouvements réels des planètes.",
+            ai_li_3: "<strong>❤️ Compatibilité (Synastrie) :</strong> Perspectives relationnelles avec un partenaire.",
+            ai_li_4: "<strong>☀️ Révolution Solaire :</strong> Votre stratégie personnelle pour l'année.",
+            ai_li_5: "<strong>🧠 Syutsai (Numérologie) :</strong> Découvrez votre Nombre de Conscience et de Mission.",
+            ai_li_6: "<strong>💬 Question à l'Astrologue :</strong> Posez n'importe quelle question et obtenez une réponse concrète.",
+            zodiac_title: "12 Signes — 12 Chemins Uniques",
+            zodiac_desc: "Choisissez votre signe ou lancez le bot pour un calcul personnel.",
+            sign_aries: "♈ Bélier", sign_taurus: "♉ Taureau", sign_gemini: "♊ Gémeaux", sign_cancer: "♋ Cancer",
+            sign_leo: "♌ Lion", sign_virgo: "♍ Vierge", sign_libra: "♎ Balance", sign_scorpio: "♏ Scorpion",
+            sign_sagittarius: "♐ Sagittaire", sign_capricorn: "♑ Capricorne", sign_aquarius: "♒ Verseau", sign_pisces: "♓ Poissons",
+            features_title: "Tout ce dont vous avez besoin au même endroit",
+            feat_1_title: "Horoscopes Généraux",
+            feat_1_desc: "Prévisions classiques : quotidiennes, hebdomadaires, mensuelles et annuelles.",
+            feat_2_title: "5 Langues",
+            feat_2_desc: "Le bot parle couramment anglais, allemand, espagnol, français et russe.",
+            feat_3_title: "PRO Gratuit",
+            feat_3_desc: "Invitez des amis et obtenez des jours d'abonnement Premium gratuitement.",
+            feat_4_title: "Confort de Telegram",
+            feat_4_desc: "Pas de sites web ni de publicité. Notifications quotidiennes directement dans votre messagerie.",
+            final_title: "Prêt à découvrir ce que les étoiles vous réservent ?",
+            final_desc: "Votre astrologue personnel vous attend. Lancez le bot dès maintenant.",
+            final_cta: "✨ Calculer Prévision Personnelle",
+            rights: "Tous droits réservés."
         }
+    };
+
+    let typingTimeout;
+    
+    // --- Main Functions ---
+
+    function updateContent(lang) {
+        const t = translations[lang];
         
+        // Update Title & Meta
+        document.title = t.meta_title;
+        document.querySelector('meta[name="description"]').setAttribute("content", t.meta_desc);
+        
+        // Update all elements with data-i18n attribute
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) {
+                el.innerHTML = t[key];
+            }
+        });
+
+        // Update Language Switcher Button Text
+        const langLabels = {en: 'EN ▾', ru: 'RU ▾', de: 'DE ▾', es: 'ES ▾', fr: 'FR ▾'};
+        document.getElementById('current-lang').innerText = langLabels[lang];
+
+        // Restart Typing Effect
+        restartTypingEffect(t.typing_text);
+    }
+
+    function restartTypingEffect(text) {
+        const typingElement = document.querySelector('.typing-effect');
+        if (!typingElement) return;
+
+        // Clear existing
+        clearTimeout(typingTimeout);
+        typingElement.textContent = '';
+        typingElement.style.setProperty('--after-content', '""'); // Ensure cursor blinks
+        
+        let index = 0;
+        function type() {
+            if (index < text.length) {
+                typingElement.textContent += text.charAt(index);
+                index++;
+                typingTimeout = setTimeout(type, 80);
+            } else {
+                typingElement.style.setProperty('--after-content', 'none'); 
+            }
+        }
+        type();
+    }
+
+    function changeLanguage(lang) {
+        updateContent(lang);
+        localStorage.setItem('userLang', lang); // Save preference
+    }
+
+    function detectAndSetLanguage() {
+        // 1. Check LocalStorage
+        const savedLang = localStorage.getItem('userLang');
+        if (savedLang && translations[savedLang]) {
+            changeLanguage(savedLang);
+            return;
+        }
+
+        // 2. Check Browser Language
+        const browserLang = navigator.language || navigator.userLanguage; 
+        const shortLang = browserLang.substring(0, 2).toLowerCase();
+
+        if (translations[shortLang]) {
+            changeLanguage(shortLang);
+        } else {
+            changeLanguage('en'); // Default fallback
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Language
+        detectAndSetLanguage();
+
+        // Scroll Observer (existing code)
         const sections = document.querySelectorAll('section');
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -565,11 +875,9 @@
                 }
             });
         }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
 
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
+        // Navbar Scroll Effect (existing code)
         let lastScrollTop = 0;
         const navbar = document.getElementById('navbar');
         if (navbar) {
@@ -583,9 +891,7 @@
                 lastScrollTop = scrollTop;
             });
         }
-
     });
     </script>
-
 </body>
 </html>
