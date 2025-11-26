@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroBot - AI Astrologer</title>
+    <meta name="description" content="Персональный гороскоп, Соляр, Сюцай и Совместимость в Telegram. Точные расчеты и AI-интерпретация.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WWLP95M48S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-WWLP95M48S');
+    </script>
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=104645689', 'ym');
+        ym(104645689, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+
+    <style>
+        /* --- Твой оригинальный CSS + Доработки --- */
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --text: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #000;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Звездный фон */
+        .stars, .twinkling {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%; display: block;
+        }
+        .stars {
+            background: #000 url('http://www.script-tutorials.com/demos/360/images/stars.png') repeat top center;
+            z-index: -2;
+        }
+        .twinkling {
+            background: transparent url('http://www.script-tutorials.com/demos/360/images/twinkling.png') repeat top center;
+            z-index: -1;
+            animation: move-twink-back 200s linear infinite;
+        }
+        @keyframes move-twink-back {
+            from {background-position:0 0;}
+            to {background-position:-10000px 5000px;}
+        }
+
+        /* Хедер */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-sizing: border-box;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #a18cd1, #fbc2eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #lang-select {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            outline: none;
+        }
+        #lang-select option { background: #000; }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .typing-container {
+            font-size: 1.2rem;
+            color: #a18cd1;
+            min-height: 1.5em;
+            margin-bottom: 40px;
+        }
+        .cursor { animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .cta-btn {
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            box-shadow: 0 0 20px rgba(106, 17, 203, 0.5);
+        }
+        .cta-btn:hover { transform: scale(1.05); }
+
+        /* Features */
+        .features {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .features h2 { text-align: center; margin-bottom: 50px; font-size: 2rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.1);
+        }
+        .card-icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .card h3 { margin: 0 0 10px 0; color: #fbc2eb; }
+        .card p { margin: 0; opacity: 0.8; line-height: 1.5; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .features { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <noscript><div><img src="https://mc.yandex.ru/watch/104645689" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+
+    <header>
+        <div class="logo">✨ AstroBot</div>
+        <select id="lang-select">
+            <option value="ru">🇷🇺 RU</option>
+            <option value="en">🇺🇸 EN</option>
+            <option value="de">🇩🇪 DE</option>
+            <option value="es">🇪🇸 ES</option>
+            <option value="fr">🇫🇷 FR</option>
+        </select>
+    </header>
+
+    <section class="hero">
+        <h1 data-i18n="hero_title">Твой персональный<br>Астролог с ИИ</h1>
+        
+        <div class="typing-container">
+            <span id="type-text"></span><span class="cursor">|</span>
+        </div>
+
+        <a href="https://t.me/Astrologyscience_bot" class="cta-btn" target="_blank">
+            <span data-i18n="btn_start">Запустить в Telegram</span>
+        </a>
+    </section>
+
+    <section class="features">
+        <h2 data-i18n="features_title">Возможности</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3 data-i18n="feat_natal">Натальная карта</h3>
+                <p data-i18n="desc_natal">Глубокий анализ личности: карьера, финансы и предназначение.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📅</div>
+                <h3 data-i18n="feat_daily">Прогноз на день</h3>
+                <p data-i18n="desc_daily">Персональные советы на каждый день по транзитам планет.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔢</div>
+                <h3 data-i18n="feat_num">Сюцай (Нумерология)</h3>
+                <p data-i18n="desc_num">Узнай свое Число Сознания, Миссию и психологию цифр.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">☀️</div>
+                <h3 data-i18n="feat_solar">Соляр</h3>
+                <p data-i18n="desc_solar">Персональный прогноз на год. Главные тренды от Дня Рождения.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💞</div>
+                <h3 data-i18n="feat_compat">Совместимость</h3>
+                <p data-i18n="desc_compat">Проверь партнера по звездам: любовь, бизнес и риски.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💬</div>
+                <h3 data-i18n="feat_ask">Вопрос Астрологу</h3>
+                <p data-i18n="desc_ask">Задай любой вопрос AI-астрологу и получи мгновенный ответ.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 AstrologyScience. <span data-i18n="rights">Все права защищены.</span></p>
+    </footer>
+
+    <script>
+        // --- ТЕКСТЫ И ПЕРЕВОДЫ ---
+        const translations = {
+            ru: {
+                hero_title: "Твой персональный<br>Астролог с ИИ",
+                btn_start: "Запустить в Telegram",
+                features_title: "Что умеет бот?",
+                feat_natal: "Натальная карта", desc_natal: "Глубокий анализ личности: карьера, финансы и предназначение.",
+                feat_daily: "Прогноз на день", desc_daily: "Персональные советы на каждый день по транзитам планет.",
+                feat_num: "Сюцай (Нумерология)", desc_num: "Узнай свое Число Сознания, Миссию и психологию цифр.",
+                feat_solar: "Соляр (Прогноз на год)", desc_solar: "Персональный прогноз на год. Главные тренды.",
+                feat_compat: "Совместимость", desc_compat: "Проверь партнера по звездам: любовь и бизнес.",
+                feat_ask: "Вопрос Астрологу", desc_ask: "Задай любой вопрос AI-астрологу и получи мгновенный ответ.",
+                rights: "Все права защищены.",
+                typing: ["Узнай свою судьбу", "Раскрой свой потенциал", "Твой личный астролог 24/7"]
+            },
+            en: {
+                hero_title: "Your Personal<br>AI Astrologer",
+                btn_start: "Start in Telegram",
+                features_title: "Features",
+                feat_natal: "Natal Chart", desc_natal: "Deep analysis of personality: career, money, destiny.",
+                feat_daily: "Daily Forecast", desc_daily: "Personal advice for every day based on planetary transits.",
+                feat_num: "Syutsai & Numbers", desc_num: "Discover your Consciousness Number and Mission.",
+                feat_solar: "Solar Return (Yearly)", desc_solar: "Personal forecast for the whole year ahead.",
+                feat_compat: "Compatibility", desc_compat: "Check partner compatibility in love and business.",
+                feat_ask: "Ask Astrologer", desc_ask: "Ask any question to the AI astrologer and get an instant answer.",
+                rights: "All rights reserved.",
+                typing: ["Discover your destiny", "Unlock your potential", "Your personal astrologer 24/7"]
+            },
+            de: {
+                hero_title: "Ihr persönlicher<br>AI-Astrologe",
+                btn_start: "In Telegram starten",
+                features_title: "Funktionen",
+                feat_natal: "Geburtshoroskop", desc_natal: "Tiefgehende Analyse: Karriere, Finanzen, Schicksal.",
+                feat_daily: "Tagesprognose", desc_daily: "Persönliche Ratschläge basierend auf Planetentransiten.",
+                feat_num: "Syutsai & Zahlen", desc_num: "Entdecken Sie Ihre Bewusstseinszahl und Mission.",
+                feat_solar: "Jahresprognose", desc_solar: "Persönliche Strategie für das ganze Jahr.",
+                feat_compat: "Kompatibilität", desc_compat: "Partnercheck für Liebe und Geschäft.",
+                feat_ask: "Frage an Astrologen", desc_ask: "Stellen Sie eine Frage und erhalten Sie sofort eine Antwort.",
+                rights: "Alle Rechte vorbehalten.",
+                typing: ["Entdecke dein Schicksal", "Entfalte dein Potenzial", "Dein Astrologe 24/7"]
+            },
+            es: {
+                hero_title: "Tu Astrólogo<br>Personal con IA",
+                btn_start: "Iniciar en Telegram",
+                features_title: "Funciones",
+                feat_natal: "Carta Natal", desc_natal: "Análisis profundo: carrera, dinero, destino.",
+                feat_daily: "Pronóstico Diario", desc_daily: "Consejos personales basados en tránsitos planetarios.",
+                feat_num: "Syutsai y Números", desc_num: "Descubre tu Número de Conciencia y Misión.",
+                feat_solar: "Pronóstico Anual", desc_solar: "Estrategia personal para todo el año.",
+                feat_compat: "Compatibilidad", desc_compat: "Comprueba tu pareja en amor y negocios.",
+                feat_ask: "Preguntar al Astrólogo", desc_ask: "Haz una pregunta y obtén respuesta instantánea.",
+                rights: "Todos los derechos reservados.",
+                typing: ["Descubre tu destino", "Libera tu potencial", "Tu astrólogo 24/7"]
+            },
+            fr: {
+                hero_title: "Votre Astrologue<br>Personnel IA",
+                btn_start: "Lancer sur Telegram",
+                features_title: "Fonctionnalités",
+                feat_natal: "Thème Natal", desc_natal: "Analyse approfondie : carrière, argent, destin.",
+                feat_daily: "Prévisions Quotidiennes", desc_daily: "Conseils personnels basés sur les transits.",
+                feat_num: "Syutsai & Chiffres", desc_num: "Découvrez votre Numéro de Conscience et Mission.",
+                feat_solar: "Prévisions Annuelles", desc_solar: "Stratégie personnelle pour l'année entière.",
+                feat_compat: "Compatibilité", desc_compat: "Vérifiez votre partenaire en amour et affaires.",
+                feat_ask: "Question à l'Astrologue", desc_ask: "Posez une question et obtenez une réponse instantanée.",
+                rights: "Tous droits réservés.",
+                typing: ["Découvrez votre destin", "Libérez votre potentiel", "Votre astrologue 24/7"]
+            }
+        };
+
+        // --- ЛОГИКА ---
+        let currentLang = 'ru';
+        const typeElement = document.getElementById('type-text');
+        const langSelect = document.getElementById('lang-select');
+        
+        // 1. Определение языка
+        const savedLang = localStorage.getItem('lang') || navigator.language.slice(0, 2);
+        if (translations[savedLang]) currentLang = savedLang;
+        langSelect.value = currentLang;
+        applyLanguage(currentLang);
+
+        // 2. Смена языка
+        langSelect.addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            localStorage.setItem('lang', currentLang);
+            applyLanguage(currentLang);
+            resetTyping();
+        });
+
+        function applyLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+        }
+
+        // 3. Эффект печати
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeTimeout;
+
+        function typeEffect() {
+            const phrases = translations[currentLang].typing;
+            const currentPhrase = phrases[phraseIndex];
+
+            if (isDeleting) {
+                typeElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typeElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                speed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                speed = 500;
+            }
+            
+            typeTimeout = setTimeout(typeEffect, speed);
+        }
+
+        function resetTyping() {
+            clearTimeout(typeTimeout);
+            phraseIndex = 0;
+            charIndex = 0;
+            isDeleting = false;
+            typeElement.textContent = '';
+            typeEffect();
+        }
+
+        // Запуск анимации
+        typeEffect();
+    </script>
+</body>
+</html>
